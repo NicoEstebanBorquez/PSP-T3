@@ -1,15 +1,8 @@
 package psp_t3_55124290y_cliente;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.PrintWriter;
-import static java.lang.Integer.parseInt;
-import java.net.Socket;
-
 public class interfaz_cliente extends javax.swing.JFrame {
 
-    //hilocliente h;
+    cliente socketCliente;
 
     public interfaz_cliente() {
         initComponents();
@@ -23,24 +16,26 @@ public class interfaz_cliente extends javax.swing.JFrame {
     private void initComponents() {
 
         jScrollPane1 = new javax.swing.JScrollPane();
-        txtPanel = new javax.swing.JTextArea();
+        txtAreaConsola = new javax.swing.JTextArea();
         txtMensaje = new javax.swing.JTextField();
         btnEnviar = new javax.swing.JButton();
         btnConectarConServidor = new javax.swing.JButton();
-        jTextField1 = new javax.swing.JTextField();
-        jTextField2 = new javax.swing.JTextField();
+        txtIp = new javax.swing.JTextField();
+        txtPuerto = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
         jTextField3 = new javax.swing.JTextField();
         jTextField4 = new javax.swing.JTextField();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Cliente");
 
-        txtPanel.setColumns(20);
-        txtPanel.setRows(5);
-        jScrollPane1.setViewportView(txtPanel);
+        txtAreaConsola.setColumns(20);
+        txtAreaConsola.setRows(5);
+        jScrollPane1.setViewportView(txtAreaConsola);
 
         btnEnviar.setText("Enviar");
         btnEnviar.addActionListener(new java.awt.event.ActionListener() {
@@ -56,29 +51,30 @@ public class interfaz_cliente extends javax.swing.JFrame {
             }
         });
 
-        jTextField1.setText("IP");
-
-        jTextField2.setText("PUERTO");
-
         jButton1.setText("Consultar");
 
         jButton2.setText("Añadir");
 
         jButton3.setText("Reducir");
 
-        jTextField3.setText("jTextField3");
+        jLabel1.setText("PUERTO:");
 
-        jTextField4.setText("jTextField4");
+        jLabel2.setText("IP:");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(154, 154, 154)
-                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(32, 32, 32)
-                .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(53, 53, 53)
+                .addComponent(jLabel2)
+                .addGap(18, 18, 18)
+                .addComponent(txtIp, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(58, 58, 58)
+                .addComponent(jLabel1)
+                .addGap(18, 18, 18)
+                .addComponent(txtPuerto, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
                 .addGap(31, 31, 31)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -88,23 +84,26 @@ public class interfaz_cliente extends javax.swing.JFrame {
                         .addComponent(btnEnviar))
                     .addComponent(btnConectarConServidor, javax.swing.GroupLayout.PREFERRED_SIZE, 484, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 268, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(112, 112, 112)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 373, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jButton1)
                             .addComponent(jButton2)
                             .addComponent(jButton3))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                            .addComponent(jTextField4, javax.swing.GroupLayout.DEFAULT_SIZE, 57, Short.MAX_VALUE)
+                            .addComponent(jTextField3))
+                        .addContainerGap())))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtIp, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtPuerto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel1)
+                    .addComponent(jLabel2))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
@@ -134,16 +133,25 @@ public class interfaz_cliente extends javax.swing.JFrame {
 
     private void btnConectarConServidorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConectarConServidorActionPerformed
         //conectar con el servidor
-      /*  try {
-            h = new hilocliente(this.txtPanel);
-            h.start();
-        } catch (Exception ex) {
 
-        }*/
+        String server = this.txtIp.getText().trim();
+        String puerto = this.txtPuerto.getText().trim();
+        
+        if (server.equals("") || puerto.equals("")) {
+            System.out.println("CAMPOS VACIOS");
+        } else {
+            try {
+                socketCliente = new cliente(this.txtAreaConsola, server, Integer.parseInt(puerto));
+                socketCliente.start();
+            } catch (Exception ex) {
+
+            }
+        }
+
     }//GEN-LAST:event_btnConectarConServidorActionPerformed
 
     private void btnEnviarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEnviarActionPerformed
-        //h.enviar(this.txtMensaje.getText());
+        socketCliente.enviar(this.txtMensaje.getText());
     }//GEN-LAST:event_btnEnviarActionPerformed
 
     /**
@@ -188,12 +196,14 @@ public class interfaz_cliente extends javax.swing.JFrame {
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
     private javax.swing.JTextField jTextField3;
     private javax.swing.JTextField jTextField4;
+    private javax.swing.JTextArea txtAreaConsola;
+    private javax.swing.JTextField txtIp;
     private javax.swing.JTextField txtMensaje;
-    private javax.swing.JTextArea txtPanel;
+    private javax.swing.JTextField txtPuerto;
     // End of variables declaration//GEN-END:variables
 }
