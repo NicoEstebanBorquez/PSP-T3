@@ -13,6 +13,10 @@ public class interfaz_servidor extends javax.swing.JFrame {
 
     public interfaz_servidor() {
         initComponents();
+        this.setTitle("Almacén de chirimoyas - Programa SERVIDOR");
+        this.setLocationRelativeTo(this);
+        this.setResizable(false);
+        this.setSize(590,465);
 
     }
 
@@ -26,44 +30,72 @@ public class interfaz_servidor extends javax.swing.JFrame {
         btnEnviar = new javax.swing.JButton();
         btnArrancarServidor = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
-        txtPuerto = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         txtStockInicial = new javax.swing.JTextField();
+        jLabel3 = new javax.swing.JLabel();
+        cbPuerto = new javax.swing.JComboBox<>();
+        wallpaper = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Servidor");
+        setBackground(new java.awt.Color(255, 255, 255));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jScrollPane1.setBackground(new java.awt.Color(255, 255, 255));
 
         txtAreaConsola.setColumns(20);
         txtAreaConsola.setRows(5);
         jScrollPane1.setViewportView(txtAreaConsola);
 
-        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(18, 62, 386, 199));
-        getContentPane().add(txtMensaje, new org.netbeans.lib.awtextra.AbsoluteConstraints(18, 268, 358, -1));
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 80, 385, 285));
+        getContentPane().add(txtMensaje, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 380, 385, 33));
 
+        btnEnviar.setBackground(new java.awt.Color(255, 255, 255));
+        btnEnviar.setForeground(new java.awt.Color(29, 33, 123));
         btnEnviar.setText("Enviar");
         btnEnviar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnEnviarActionPerformed(evt);
             }
         });
-        getContentPane().add(btnEnviar, new org.netbeans.lib.awtextra.AbsoluteConstraints(96, 297, 164, 33));
+        getContentPane().add(btnEnviar, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 380, 90, 33));
 
-        btnArrancarServidor.setText("Arrancar servidor");
+        btnArrancarServidor.setBackground(new java.awt.Color(51, 153, 0));
+        btnArrancarServidor.setFont(new java.awt.Font("Gadugi", 1, 14)); // NOI18N
+        btnArrancarServidor.setForeground(new java.awt.Color(255, 255, 255));
+        btnArrancarServidor.setText("Iniciar servidor");
         btnArrancarServidor.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnArrancarServidorActionPerformed(evt);
             }
         });
-        getContentPane().add(btnArrancarServidor, new org.netbeans.lib.awtextra.AbsoluteConstraints(35, 19, 324, -1));
+        getContentPane().add(btnArrancarServidor, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 80, 140, 50));
 
+        jLabel1.setFont(new java.awt.Font("Gadugi", 0, 14)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(29, 33, 123));
         jLabel1.setText("Puerto:");
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(479, 78, -1, -1));
-        getContentPane().add(txtPuerto, new org.netbeans.lib.awtextra.AbsoluteConstraints(539, 75, 51, -1));
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(455, 160, -1, -1));
 
+        jLabel2.setFont(new java.awt.Font("Gadugi", 0, 14)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(29, 33, 123));
         jLabel2.setText("Stock inicial:");
-        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(449, 118, -1, -1));
-        getContentPane().add(txtStockInicial, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 120, 51, -1));
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 195, -1, -1));
+        getContentPane().add(txtStockInicial, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 195, 60, -1));
+
+        jLabel3.setFont(new java.awt.Font("Gadugi", 1, 30)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(29, 33, 123));
+        jLabel3.setText("Almacén de chirimoyas - SERVIDOR");
+        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 15, -1, -1));
+
+        cbPuerto.setFont(new java.awt.Font("Gadugi", 0, 14)); // NOI18N
+        cbPuerto.setForeground(new java.awt.Color(29, 33, 123));
+        cbPuerto.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "8899", "8098", "9090" }));
+        getContentPane().add(cbPuerto, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 160, -1, -1));
+
+        wallpaper.setBackground(new java.awt.Color(153, 255, 51));
+        wallpaper.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/Wallpaper.png"))); // NOI18N
+        wallpaper.setText("jLabel3");
+        getContentPane().add(wallpaper, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 590, 430));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -73,16 +105,30 @@ public class interfaz_servidor extends javax.swing.JFrame {
     }//GEN-LAST:event_btnEnviarActionPerformed
 
     private void btnArrancarServidorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnArrancarServidorActionPerformed
-        String puerto = this.txtPuerto.getText().trim();
+        String puerto = "";
+        int comboPuerto = cbPuerto.getSelectedIndex();
+
+        switch (comboPuerto) {
+            case 0:
+                puerto = "8899";
+                break;
+            case 1:
+                puerto = "8098";
+                break;
+            case 2:
+                puerto = "9090";
+                break;
+        }
+        
         String stockInicial = this.txtStockInicial.getText().trim();
 
-        if (!puerto.equals("") && !stockInicial.equals("")) {
+        if (!stockInicial.equals("")) {
             socketServidor = new servidor(this.txtAreaConsola, Integer.parseInt(puerto));
             socketServidor.start();
             
             socketServidor.setStock(Integer.parseInt(stockInicial));
         } else {
-            JOptionPane.showMessageDialog(this, "Debe indicar un PUERTO y el STOCK INICAL para iniciar el servidor.", null, JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, "Debe indicar un STOCK INICAL para iniciar el servidor.", null, JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_btnArrancarServidorActionPerformed
 
@@ -127,12 +173,14 @@ public class interfaz_servidor extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnArrancarServidor;
     private javax.swing.JButton btnEnviar;
+    private javax.swing.JComboBox<String> cbPuerto;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextArea txtAreaConsola;
     private javax.swing.JTextField txtMensaje;
-    private javax.swing.JTextField txtPuerto;
     private javax.swing.JTextField txtStockInicial;
+    private javax.swing.JLabel wallpaper;
     // End of variables declaration//GEN-END:variables
 }
