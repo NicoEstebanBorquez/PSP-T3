@@ -7,26 +7,31 @@ import java.net.ServerSocket;
 import java.net.Socket;
 import javax.swing.JTextArea;
 
+/**
+ * Esta clase se encarga de la creacion del hilo Servidor y del control del Stock de chirimoyas.
+ *
+ * @author Nicolás Esteban 55124290Y
+ */
 public class servidor extends Thread {
 
     private ServerSocket socketServidor;
     private Socket socketCliente;
     private int puerto;
-
     private JTextArea consola;
-
     private BufferedReader recibir;
     private PrintWriter enviar;
-
-    private boolean salir = false;
-
     private int stock;
 
-    public servidor(JTextArea consola, int puerto) {
-
+    /**
+     * Constructor de la clase.
+     * @param consola Objeto tipo JTextArea donde se imprimirán los mensajes.
+     * @param puerto Puerto al que se realizará la conexión.
+     * @param stockInicial Stock con el que se inicia el programa.
+     */
+    public servidor(JTextArea consola, int puerto, int stockInicial) {
         this.consola = consola;
         this.puerto = puerto;
-
+        this.stock = stockInicial;
         try {
             socketServidor = new ServerSocket(puerto);
             consola.append("El servidor se ha iniciado correctamente en el puerto " + puerto + System.lineSeparator());
@@ -36,13 +41,10 @@ public class servidor extends Thread {
         }
     }
 
-    public void enviar(String mensaje) {
-        enviar.println(mensaje);
-        enviar.flush();
-    }
-
+    /**
+     * Método que inicia el hilo Servidor.
+     */
     public void run() {
-
         try {
             socketCliente = socketServidor.accept();
             consola.append("Conexión realizada con el cliente" + System.lineSeparator());
@@ -50,11 +52,11 @@ public class servidor extends Thread {
 
             recibir = new BufferedReader(new InputStreamReader(socketCliente.getInputStream()));
             enviar = new PrintWriter(socketCliente.getOutputStream(), true);
-            while (!salir) {
+            while (true) {
                 String textoRecibido = recibir.readLine();
                 switch (textoRecibido) {
                     case "CONSULTA DE STOCK":
-                         this.enviar("Stock disponible: " + this.getStock());
+                        this.enviar("Stock disponible: " + this.getStock());
                         break;
                     case "+1":
                         this.aumentarStock();
@@ -67,22 +69,44 @@ public class servidor extends Thread {
                 consola.append("Cliente: " + textoRecibido + System.lineSeparator());
             }
         } catch (Exception e) {
-
+            System.out.println(e.getMessage());
         }
     }
 
+    /**
+     * Método que envía el mensaje al Cliente.
+     *
+     * @param mensaje Mensaje que será enviado.
+     */
+    public void enviar(String mensaje) {
+        enviar.println(mensaje);
+        enviar.flush();
+    }
+
+    /**
+     * Método que disminuye el stock en -1 chirimoya.
+     */
     private void reducirStock() {
         this.stock = stock - 1;
     }
 
+    /**
+     * Método que aumenta el stock en 1 chirimoya.
+     */
     private void aumentarStock() {
         this.stock = stock + 1;
     }
 
+    /**
+     * Método que obtiene el stock actual.
+     */
     public int getStock() {
         return stock;
     }
 
+    /**
+     * Método setter de stock.
+     */
     public void setStock(int stock) {
         this.stock = stock;
     }

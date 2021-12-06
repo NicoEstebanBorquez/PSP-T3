@@ -16,7 +16,7 @@ public class interfaz_servidor extends javax.swing.JFrame {
         this.setTitle("Almacén de chirimoyas - Programa SERVIDOR");
         this.setLocationRelativeTo(this);
         this.setResizable(false);
-        this.setSize(590,465);
+        this.setSize(590, 465);
 
     }
 
@@ -34,6 +34,9 @@ public class interfaz_servidor extends javax.swing.JFrame {
         txtStockInicial = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
         cbPuerto = new javax.swing.JComboBox<>();
+        jLabel7 = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
+        jLabel4 = new javax.swing.JLabel();
         wallpaper = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -92,6 +95,27 @@ public class interfaz_servidor extends javax.swing.JFrame {
         cbPuerto.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "8899", "8098", "9090" }));
         getContentPane().add(cbPuerto, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 160, -1, -1));
 
+        jLabel7.setFont(new java.awt.Font("Gadugi", 0, 14)); // NOI18N
+        jLabel7.setForeground(new java.awt.Color(29, 33, 123));
+        jLabel7.setText("Consultar stock:");
+        getContentPane().add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 275, -1, -1));
+
+        jButton1.setBackground(new java.awt.Color(255, 255, 255));
+        jButton1.setFont(new java.awt.Font("Gadugi", 1, 14)); // NOI18N
+        jButton1.setForeground(new java.awt.Color(29, 33, 123));
+        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/Sin título.png"))); // NOI18N
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(535, 270, 40, 33));
+
+        jLabel4.setFont(new java.awt.Font("Gadugi", 1, 16)); // NOI18N
+        jLabel4.setForeground(new java.awt.Color(29, 33, 123));
+        jLabel4.setText("Operaciones:");
+        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 240, -1, -1));
+
         wallpaper.setBackground(new java.awt.Color(153, 255, 51));
         wallpaper.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/Wallpaper.png"))); // NOI18N
         wallpaper.setText("jLabel3");
@@ -119,23 +143,37 @@ public class interfaz_servidor extends javax.swing.JFrame {
                 puerto = "9090";
                 break;
         }
-        
+
         String stockInicial = this.txtStockInicial.getText().trim();
 
         if (!stockInicial.equals("")) {
-            socketServidor = new servidor(this.txtAreaConsola, Integer.parseInt(puerto));
+            socketServidor = new servidor(this.txtAreaConsola, Integer.parseInt(puerto), Integer.parseInt(stockInicial));
             socketServidor.start();
-            
-            socketServidor.setStock(Integer.parseInt(stockInicial));
+
+            //socketServidor.setStock(Integer.parseInt(stockInicial));
         } else {
             JOptionPane.showMessageDialog(this, "Debe indicar un STOCK INICAL para iniciar el servidor.", null, JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_btnArrancarServidorActionPerformed
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        String stock = String.valueOf(socketServidor.getStock());
+        JOptionPane.showMessageDialog(this, "Stock disponible: " + stock);
+    }//GEN-LAST:event_jButton1ActionPerformed
+
     /**
      * @param args the command line arguments
      */
     public static void main(String args[]) {
+
+        System.out.println(
+                "***************************************\n"
+                + "* PSP - Tarea Individual 4 - Servidor *\n"
+                + "***************************************\n"
+                + "*  Nicolás Esteban Bórquez  *\n"
+                + "***************************************\n"
+                + "*  55124290Y  *\n"
+                + "*************************************** ");
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
@@ -174,9 +212,12 @@ public class interfaz_servidor extends javax.swing.JFrame {
     private javax.swing.JButton btnArrancarServidor;
     private javax.swing.JButton btnEnviar;
     private javax.swing.JComboBox<String> cbPuerto;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextArea txtAreaConsola;
     private javax.swing.JTextField txtMensaje;

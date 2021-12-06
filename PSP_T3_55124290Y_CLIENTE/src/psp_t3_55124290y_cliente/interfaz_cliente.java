@@ -224,6 +224,15 @@ public class interfaz_cliente extends javax.swing.JFrame {
      * @param args the command line arguments
      */
     public static void main(String args[]) {
+        
+         System.out.println(
+                  "***************************************\n"
+                + "* PSP - Tarea Individual 4 - Cliente *\n"
+                + "***************************************\n"
+                + "*  Nicolás Esteban Bórquez  *\n"
+                + "***************************************\n"
+                + "*  55124290Y  *\n"
+                + "*************************************** ");
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
