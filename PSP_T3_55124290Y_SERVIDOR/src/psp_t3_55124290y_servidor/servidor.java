@@ -20,11 +20,13 @@ public class servidor extends Thread {
 
     private boolean salir = false;
 
+    private int stock;
+
     public servidor(JTextArea consola, int puerto) {
 
         this.consola = consola;
         this.puerto = puerto;
-        
+
         try {
             socketServidor = new ServerSocket(puerto);
             consola.append("El servidor se ha iniciado correctamente en el puerto " + puerto + System.lineSeparator());
@@ -50,11 +52,39 @@ public class servidor extends Thread {
             enviar = new PrintWriter(socketCliente.getOutputStream(), true);
             while (!salir) {
                 String textoRecibido = recibir.readLine();
-                consola.append("Servidor: " + textoRecibido + System.lineSeparator());
+                switch (textoRecibido) {
+                    case "CONSULTA DE STOCK":
+                         this.enviar("Stock disponible: " + this.getStock());
+                        break;
+                    case "+1":
+                        this.aumentarStock();
+                        break;
+                    case "-1":
+                        this.reducirStock();
+                        break;
+                    default:
+                }
+                consola.append("Cliente: " + textoRecibido + System.lineSeparator());
             }
         } catch (Exception e) {
 
         }
+    }
+
+    private void reducirStock() {
+        this.stock = stock - 1;
+    }
+
+    private void aumentarStock() {
+        this.stock = stock + 1;
+    }
+
+    public int getStock() {
+        return stock;
+    }
+
+    public void setStock(int stock) {
+        this.stock = stock;
     }
 
 }

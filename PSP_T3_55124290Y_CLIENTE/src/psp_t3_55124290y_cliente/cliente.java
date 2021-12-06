@@ -4,6 +4,7 @@ import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.Socket;
+import javax.swing.JOptionPane;
 import javax.swing.JTextArea;
 
 public class cliente extends Thread {
@@ -11,7 +12,7 @@ public class cliente extends Thread {
     private Socket socketCliente;
     private String server;
     private int puerto;
-    
+
     private JTextArea consola;
 
     private BufferedReader recibir;
@@ -48,11 +49,16 @@ public class cliente extends Thread {
 
             while (!salir) {
                 String textoRecibido = recibir.readLine();
-                consola.append("Servidor: " + textoRecibido + System.lineSeparator());
+                
+                if (textoRecibido.contains("Stock")) {
+                    consola.append(textoRecibido + System.lineSeparator());
+                    JOptionPane.showMessageDialog(null, textoRecibido);
+                } else {
+                    consola.append("Servidor: " + textoRecibido + System.lineSeparator());
+                }
             }
         } catch (Exception e) {
         }
     }
-
 
 }
